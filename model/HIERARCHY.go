@@ -3,18 +3,14 @@
 package model
 
 import (
+	"encoding/xml"
 	"encoding/json"
-  
-  "strconv"
-
-  
- "strings"
-
-  
-	"my/server/config"
+	  "strconv" 
+    
 	"io/ioutil"
 	"os"
 	"fmt"
+	"пппппп/server/config"
 )
 
 
@@ -95,53 +91,72 @@ func (ob HIERARCHY) ReadFromJson(file string){
 
 func  (ob HIERARCHY)  TmplElem(id string) string{
    
-	v := listform{
-		Name:  "listform",
+	v := ListForm{
+		Name:  "ListForm",
 		Title: "",
 		Stroki: []arrayFieldSection{
-			{
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Ссылка",
-						Value:    ob.ID,
-						Buttons: "",
+						Value:   ob.ID, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Наименование",
-						Value:    ob.NAME,
-						Buttons: "",
+						Value:   ob.NAME, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "",
-						Value:    ob.TEXT,
-						Buttons: "",
+						Value:   ob.TEXT, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "",
-						Value:    ob.WEIGHTLEFT,
-						Buttons: "",
+						Value: 
+							      strconv.Itoa(ob.WEIGHTLEFT), 
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "",
-						Value:    ob.WEIGHTRIGHT,
-						Buttons: "",
+						Value: 
+							      strconv.Itoa(ob.WEIGHTRIGHT), 
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
 
-		
+		},
 		Buttons: []Button{
 			{
 				Name:       "Войти",

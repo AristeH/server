@@ -1,18 +1,15 @@
 // Формат передаваемых данных
 // гуиэлемент.типзначения, заголовок, значение
 
-package externalserver
+package model
 
 import (
 	"encoding/xml"
 	"fmt"
-	"model"
+
 )
 
-// Gui Fom
-const (
-	ListForm = 1
-)
+
 
 // Типы передаваемых данных
 const (
@@ -36,7 +33,7 @@ type ID struct {
 }
 
 //listform
-type listform struct {
+type ListForm struct {
 	Name    string              `xml:"name"`
 	Title   string              `xml:"title"`
 	Stroki  []arrayFieldSection `xml:"stroki"`
@@ -63,7 +60,7 @@ type arrayFieldSection struct {
 
 //Login функция доступа к серверу
 func Login(param []string) string {
-	v := listform{
+	v := ListForm{
 		Name:  "listform",
 		Title: "Введите регистрационные данные",
 		Stroki: []arrayFieldSection{
@@ -105,9 +102,10 @@ func Login(param []string) string {
 		fmt.Printf("error: %v\n", err)
 	}
 
-	ct = new(model.CODETEL)
-	ct.Read("e3f5d71c-aa2b-11e9-a487-e0071bef4048") 
-
-
+	ct := new(CODETEL)
+	err = ct.Read("e3f5d71c-aa2b-11e9-a487-e0071bef4048")
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	}
 	return string(output)
 }

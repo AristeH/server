@@ -3,18 +3,14 @@
 package model
 
 import (
+	"encoding/xml"
 	"encoding/json"
-  
-  "strconv"
-
-  
- "strings"
-
-  
-	"my/server/config"
+	  "strconv" 
+    
 	"io/ioutil"
 	"os"
 	"fmt"
+	"пппппп/server/config"
 )
 
 
@@ -93,45 +89,60 @@ func (ob DEPARTMENT) ReadFromJson(file string){
 
 func  (ob DEPARTMENT)  TmplElem(id string) string{
    
-	v := listform{
-		Name:  "listform",
+	v := ListForm{
+		Name:  "ListForm",
 		Title: "Подразделения",
 		Stroki: []arrayFieldSection{
-			{
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Ссылка",
-						Value:    ob.ID,
-						Buttons: "",
+						Value:   ob.ID, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Наименование",
-						Value:    ob.NAME,
-						Buttons: "",
+						Value:   ob.NAME, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Уровень",
-						Value:    ob.LEVEL,
-						Buttons: "",
+						Value: 
+							      strconv.Itoa(ob.LEVEL), 
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Папка",
-						Value:    ob.ID_PARENT,
-						Buttons: "",
+						Value:   ob.ID_PARENT, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
 
-		
+		},
 		Buttons: []Button{
 			{
 				Name:       "Войти",

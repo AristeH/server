@@ -2,29 +2,18 @@ package main
 
 import (
 	"fmt"
+	"пппппп/server/config"
 	egui "пппппп/server/externalserver"
+	"пппппп/server/model"
 
-	"github.com/jmoiron/sqlx"
 	_ "github.com/nakagami/firebirdsql"
 )
 
-// Config структура подключения к БД
-type Config struct {
-	DB     *sqlx.DB
-	Pathdb string
-}
-
-// Parametrs переменная хранящая данные о БД
-var Parametrs Config
-
 // OpenDB подключение к БД
 func OpenDB() error {
-	Parametrs.Pathdb = "C:/obmen/FIRST.fdb"
-	db, err := sqlx.Open("firebirdsql", "sysdba:masterkey@localhost:3050/C:/obmen/FIRST.fdb?auth_plugin_name=Legacy_Auth&wire_auth=true&column_name_to_lower=false")
-	Parametrs.DB = db
-
-	egui.RegFunc("login", egui.Login)
-	return err
+	config.SetParametrs()
+	egui.RegFunc("login", model.Login)
+	return nil
 }
 
 func parse() {
@@ -39,7 +28,7 @@ func parse() {
 			case "login":
 
 				println(" 33 " + res.Message.Action)
-				res.Client.Sendout(egui.Login(res.Message.Parameters))
+				res.Client.Sendout(model.Login(res.Message.Parameters))
 
 			case "runproc":
 				go egui.Runproc(res)

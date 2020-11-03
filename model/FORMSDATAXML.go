@@ -3,15 +3,14 @@
 package model
 
 import (
+	"encoding/xml"
 	"encoding/json"
-  
- "strings"
-
-  
-	"my/server/config"
+	
+    
 	"io/ioutil"
 	"os"
 	"fmt"
+	"пппппп/server/config"
 )
 
 
@@ -19,6 +18,7 @@ import (
 type FORMSDATAXML struct {
 	VIEWNAME string `json:""` // VIEWNAME
 	DATAXML string `json:""` // DATAXML
+	ID string `json:"Ссылка"` // ID
 }
 
 type FORMSDATAXMLList struct {
@@ -26,7 +26,7 @@ type FORMSDATAXMLList struct {
 }
 
 func  (ob FORMSDATAXML) Create() error{
-    sqlstr := `create table FORMSDATAXML  (VIEWNAME, DATAXML)
+    sqlstr := `create table FORMSDATAXML  (VIEWNAME, DATAXML, ID)
                          CONSTRAINT CODETEL_PK PRIMARY KEY (ID));`
     _, err := config.DB.Exec(sqlstr)
    	if err != nil {
@@ -45,10 +45,10 @@ func (ob FORMSDATAXML) Delete() error{
 }
 
 func (ob FORMSDATAXML) Save() error{
-   sqlstr := "update or insert into  FORMSDATAXML  (VIEWNAME, DATAXML) "+
-   " values (?, ?)" +
+   sqlstr := "update or insert into  FORMSDATAXML  (VIEWNAME, DATAXML, ID) "+
+   " values (?, ?, ?)" +
    " matching (ID)"
-   _, err := config.DB.Exec(sqlstr,  ob.VIEWNAME, ob.DATAXML)
+   _, err := config.DB.Exec(sqlstr,  ob.VIEWNAME, ob.DATAXML, ob.ID)
    if err != nil {
      return err
    }
@@ -58,7 +58,7 @@ func (ob FORMSDATAXML) Save() error{
 func (ob FORMSDATAXML) Read(id string) error{
    const sqlstr = `select * FROM FORMSDATAXML  WHERE ID =  ?`
    row := config.DB.QueryRow(sqlstr, id)
-   err := row.Scan( &ob.VIEWNAME, &ob.DATAXML,)
+   err := row.Scan( &ob.VIEWNAME, &ob.DATAXML, &ob.ID,)
    if err != nil {
 	 return err
    }
@@ -79,6 +79,7 @@ func (ob FORMSDATAXML) ReadFromJson(file string){
 	for i := 0; i < len(recs.Recs); i++ {
 	   ob.VIEWNAME = recs.Recs[i].VIEWNAME
 	   ob.DATAXML = recs.Recs[i].DATAXML
+	   ob.ID = recs.Recs[i].ID
 	   ob.Save()
 	}
 
@@ -86,29 +87,48 @@ func (ob FORMSDATAXML) ReadFromJson(file string){
 
 func  (ob FORMSDATAXML)  TmplElem(id string) string{
    
-	v := listform{
-		Name:  "listform",
+	v := ListForm{
+		Name:  "ListForm",
 		Title: "",
 		Stroki: []arrayFieldSection{
-			{
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "",
-						Value:    ob.VIEWNAME,
-						Buttons: "",
+						Value:   ob.VIEWNAME, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "",
-						Value:    ob.DATAXML,
-						Buttons: "",
+						Value:   ob.DATAXML, 
+							   
+							    
+							           
+    					Buttons: "",
+					},
+				},
+			},
+	        { 
+	  		    Fields: []FieldSection{
+					{
+						Name:     "Ссылка",
+						Value:   ob.ID, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
 
-		
+		},
 		Buttons: []Button{
 			{
 				Name:       "Войти",

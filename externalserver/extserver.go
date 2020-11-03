@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
 	"github.com/gorilla/websocket"
 )
 
@@ -56,15 +55,16 @@ var Manager = ClientManager{
 }
 
 // Start функция  для работы с клиентами
-func (manager *ClientManager) Start() {
+
+func (manager *ClientManager) Start(s string) {
 	for {
 		select {
 		case conn := <-manager.Register:
 			fmt.Println("A new socket has connected....")
 			manager.Clients[conn] = true
 			//jsonMessage, _ := json.Marshal(&Message{Content: "/A new socket has connected."})
-			var s []string
-			s1 := "login;" + Login(s)
+			
+			s1 := "login;" + s
 
 			manager.send([]byte(s1), conn)
 		case conn := <-manager.Unregister:
@@ -99,7 +99,7 @@ func (manager *ClientManager) send(message []byte, ignore *Client) {
 // Init инициализация
 func Init(sOpt string) {
 	fmt.Println("Приложение запущено...")
-	go Manager.Start()
+	go Manager.Start("")
 
 	http.HandleFunc("/telephon", wsPage)
 	http.ListenAndServe(sOpt, nil)

@@ -3,15 +3,14 @@
 package model
 
 import (
+	"encoding/xml"
 	"encoding/json"
-  
- "strings"
-
-  
-	"my/server/config"
+	
+    
 	"io/ioutil"
 	"os"
 	"fmt"
+	"пппппп/server/config"
 )
 
 
@@ -90,45 +89,60 @@ func (ob USERS) ReadFromJson(file string){
 
 func  (ob USERS)  TmplElem(id string) string{
    
-	v := listform{
-		Name:  "listform",
+	v := ListForm{
+		Name:  "ListForm",
 		Title: "Пользователи",
 		Stroki: []arrayFieldSection{
-			{
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Ссылка",
-						Value:    ob.ID,
-						Buttons: "",
+						Value:   ob.ID, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Наименование",
-						Value:    ob.NAME,
-						Buttons: "",
+						Value:   ob.NAME, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Код",
-						Value:    ob.CODE,
-						Buttons: "",
+						Value:   ob.CODE, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "",
-						Value:    ob.PASSWORD,
-						Buttons: "",
+						Value:   ob.PASSWORD, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
 
-		
+		},
 		Buttons: []Button{
 			{
 				Name:       "Войти",

@@ -3,15 +3,14 @@
 package model
 
 import (
+	"encoding/xml"
 	"encoding/json"
-  
- "strings"
-
-    "time"
-	"my/server/config"
+	  "strconv" 
+      "time"
 	"io/ioutil"
 	"os"
 	"fmt"
+	"пппппп/server/config"
 )
 
 
@@ -102,93 +101,132 @@ func (ob PERSONEL) ReadFromJson(file string){
 
 func  (ob PERSONEL)  TmplElem(id string) string{
    
-	v := listform{
-		Name:  "listform",
+	v := ListForm{
+		Name:  "ListForm",
 		Title: "Кадровые данные",
 		Stroki: []arrayFieldSection{
-			{
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Ссылка",
-						Value:    ob.ID,
-						Buttons: "",
+						Value: 
+							      strconv.Itoa(ob.ID), 
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Физическое лицо",
-						Value:    ob.ID_PERSON,
-						Buttons: "",
+						Value:   ob.ID_PERSON, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Должности",
-						Value:    ob.ID_POST,
-						Buttons: "",
+						Value:   ob.ID_POST, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Подразделение",
-						Value:    ob.ID_DEPARTMENT,
-						Buttons: "",
+						Value:   ob.ID_DEPARTMENT, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Табельный номер",
-						Value:    ob.PERSONNUMBER,
-						Buttons: "",
+						Value:   ob.PERSONNUMBER, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Вид занятости",
-						Value:    ob.EMPLOYMENTTYPE,
-						Buttons: "",
+						Value: 
+							   
+							      strconv.FormatBool(ob.EMPLOYMENTTYPE),  
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Вид события начало",
-						Value:    ob.EVENTSTART,
-						Buttons: "",
+						Value:   ob.EVENTSTART, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Дата события начало",
-						Value:    ob.DATESTART,
-						Buttons: "",
+						Value: 
+							   
+							    
+							       ob.DATESTART.Format("2006/01/02"),        
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Вид события окончание",
-						Value:    ob.EVENTEND,
-						Buttons: "",
+						Value:   ob.EVENTEND, 
+							   
+							    
+							           
+    					Buttons: "",
 					},
 				},
 			},
-	  		Fields: []FieldSection{
+	        { 
+	  		    Fields: []FieldSection{
 					{
 						Name:     "Дата события окончание",
-						Value:    ob.DATEEND,
-						Buttons: "",
+						Value: 
+							   
+							    
+							       ob.DATEEND.Format("2006/01/02"),        
+    					Buttons: "",
 					},
 				},
 			},
 
-		
+		},
 		Buttons: []Button{
 			{
 				Name:       "Войти",
